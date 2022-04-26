@@ -4,7 +4,7 @@ import './Expert.css'
 const Expert = ({expert}) => {
 	const {name, img} = expert;
 	return (
-		<div className='g-5 col-sm-12 col-md-6 col-lg-4 mx-auto'>
+		<div  className='g-5 col-sm-12 col-md-6 col-lg-4 mx-auto'>
 			<div className="card">
   			<img src={img} className="card-img-top w-100" alt="..."/>
 			<div className="card-body">
