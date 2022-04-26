@@ -7,6 +7,8 @@ import Loading from "../../Shared/Loading/Loading";
 import SocialLogin from "../SocialLogin/SocialLogin";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import axios from "axios";
+import useToken from "../../../hooks/useToken";
 
 const Login = () => {
   const emailRef = useRef('');
@@ -25,6 +27,7 @@ const Login = () => {
   ] = useSignInWithEmailAndPassword(auth);
 
   const [sendPasswordResetEmail, sending] = useSendPasswordResetEmail(auth);
+  const [token] = useToken(user);
 
   if(loading || sending){
 		return <Loading></Loading>
@@ -36,16 +39,19 @@ const Login = () => {
       </div>
   }
 
-  if(user){
+  if(token){
+
     navigate(from, {replace:true});
   }
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
 	  event.preventDefault();
 	  const email = emailRef.current.value;
 	  const password = passwordRef.current.value;
 
-	  signInWithEmailAndPassword(email, password);
+	  await signInWithEmailAndPassword(email, password);
+    
+    
   }
 
   const navigateRegister = event => {
